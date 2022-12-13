@@ -23,11 +23,11 @@ public enum Commands {
                 .orElseThrow(() -> new IllegalArgumentException(ERROR_TITLE + COMMAND_FORMAT));
     }
 
-    public boolean isKeyForRetrial() {
+    public boolean isRetry() {
         return this.equals(RETRY);
     }
 
-    public boolean isKeyForQuit() {
+    public boolean isQuit() {
         return this.equals(QUIT);
     }
 

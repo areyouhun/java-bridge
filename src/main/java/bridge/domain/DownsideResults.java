@@ -3,6 +3,8 @@ package bridge.domain;
 import static bridge.util.Constants.BLANK_SPACE;
 
 import bridge.util.Commands;
+import bridge.util.Moves;
+import java.util.List;
 
 public class DownsideResults extends OneSideResults {
 
@@ -11,17 +13,16 @@ public class DownsideResults extends OneSideResults {
     }
 
     @Override
-    public void update(String playerMove, String matchResult) {
-        if (Commands.isUp(playerMove)) {
-            addResult(BLANK_SPACE);
+    public void update(Moves playerMove, String matchResult) {
+        if (playerMove.isUp()) {
+            add(BLANK_SPACE);
         }
-        if (Commands.isDown(playerMove)) {
-            addResult(matchResult);
+        if (playerMove.isDown()) {
+            add(matchResult);
         }
     }
 
-    private void addResult(String result) {
-        super.getResults()
-                .add(result);
+    private void add(String result) {
+        super.getResults().add(result);
     }
 }

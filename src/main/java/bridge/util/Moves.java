@@ -32,7 +32,15 @@ public enum Moves {
         return DOWN.key;
     }
 
-    public boolean isCorrectMove(String move) {
-        return this.key.equals(move);
+    public boolean isCorrectMove(String input) {
+        return this.key.equals(input);
+    }
+
+    public boolean isUp() {
+        return this.equals(UP);
+    }
+
+    public boolean isDown() {
+        return this.equals(DOWN);
     }
 }
