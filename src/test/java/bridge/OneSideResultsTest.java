@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import bridge.domain.DownsideResults;
 import bridge.domain.OneSideResults;
 import bridge.domain.UpsideResults;
+import bridge.util.Moves;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,9 +23,9 @@ class OneSideResultsTest {
         downsideResults = new DownsideResults();
     }
 
-    void updateBothSidesResults(String currentMove, String matchResult) {
-        upsideResults.update(currentMove, matchResult);
-        downsideResults.update(currentMove, matchResult);
+    void updateBothSidesResults(Moves playerMove, String matchResult) {
+        upsideResults.update(playerMove, matchResult);
+        downsideResults.update(playerMove, matchResult);
     }
 
     void assertBothSidesResults(String expectedUpsideResult, String expectedDownsideResult) {
@@ -37,7 +38,7 @@ class OneSideResultsTest {
     @DisplayName("플레이어가 위 칸을 건넜을 때 통과하는 경우, 위 칸에 O가 추가되고 아래 칸에는 공백이 추가된다.")
     @Test
     void case1() {
-        updateBothSidesResults("U", "O");
+        updateBothSidesResults(Moves.UP, "O");
 
         assertBothSidesResults("O", " ");
     }
@@ -45,7 +46,7 @@ class OneSideResultsTest {
     @DisplayName("플레이어가 위 칸을 건넜을 때 실패하는 경우, 위 칸에 X가 추가되고 아래 칸에는 공백이 추가된다.")
     @Test
     void case2() {
-        updateBothSidesResults("U", "X");
+        updateBothSidesResults(Moves.UP, "X");
 
         assertBothSidesResults("X", " ");
     }
@@ -53,7 +54,7 @@ class OneSideResultsTest {
     @DisplayName("플레이어가 아래 칸을 건넜을 때 통과하는 경우, 위 칸에 공백이 추가되고 아래 칸에는 O가 추가된다.")
     @Test
     void case3() {
-        updateBothSidesResults("D", "O");
+        updateBothSidesResults(Moves.DOWN, "O");
 
         assertBothSidesResults(" ", "O");
     }
@@ -61,7 +62,7 @@ class OneSideResultsTest {
     @DisplayName("플레이어가 아래 칸을 건넜을 때 실패하는 경우, 위 칸에 공백이 추가되고 아래 칸에는 X가 추가된다.")
     @Test
     void case4() {
-        updateBothSidesResults("D", "X");
+        updateBothSidesResults(Moves.DOWN, "X");
 
         assertBothSidesResults(" ", "X");
     }
@@ -69,7 +70,7 @@ class OneSideResultsTest {
     @DisplayName("플레이어가 게임을 다시 시작하는 경우, 위 칸의 이동 기록이 전부 사라진다.")
     @Test
     void resetUpsideResult() {
-        upsideResults.update("U", "X");
+        upsideResults.update(Moves.UP, "X");
         final int previousSizeOfUpside = upsideResults.getResults().size();
         upsideResults.reset();
         final int currentSizeOfUpside = upsideResults.getResults().size();
@@ -80,7 +81,7 @@ class OneSideResultsTest {
     @DisplayName("플레이어가 게임을 다시 시작하는 경우, 아래 칸의 이동 기록이 전부 사라진다.")
     @Test
     void resetDownsideResult() {
-        downsideResults.update("D", "X");
+        downsideResults.update(Moves.DOWN, "X");
         final int previousSizeOfDownside = downsideResults.getResults().size();
         downsideResults.reset();
         final int currentSizeOfDownside = downsideResults.getResults().size();

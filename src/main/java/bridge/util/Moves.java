@@ -32,8 +32,8 @@ public enum Moves {
         return DOWN.key;
     }
 
-    public boolean isCorrectMove(String input) {
-        return this.key.equals(input);
+    public boolean isCorrect(String answerMove) {
+        return this.key.equals(answerMove);
     }
 
     public boolean isUp() {

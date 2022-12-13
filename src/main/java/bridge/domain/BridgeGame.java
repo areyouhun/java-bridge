@@ -1,5 +1,7 @@
 package bridge.domain;
 
+import bridge.util.Moves;
+
 public class BridgeGame {
 
     private static final int INITIAL_COUNT = 1;
@@ -22,14 +24,14 @@ public class BridgeGame {
         finalResult = SUCCESS;
     }
 
-    public String move(String playerMove, String answerMove) {
-        if (playerMove.equals(answerMove)) {
+    public String move(Moves playerMove, String answerMove) {
+        if (playerMove.isCorrect(answerMove)) {
             return CORRECT_MOVE;
         }
         return WRONG_MOVE;
     }
 
-    public void updateBothSidesResults(String playerMove, String matchResult) {
+    public void updateBothSidesResults(Moves playerMove, String matchResult) {
         upsideResults.update(playerMove, matchResult);
         downsideResults.update(playerMove, matchResult);
     }
@@ -49,18 +51,8 @@ public class BridgeGame {
     }
 
     public boolean hasWrongMove() {
-        return checkIfUpsideResultsContainsWrongMove() ||
-                checkIfDownsideResultsContainsWrongMove();
-    }
-    
-    private boolean checkIfUpsideResultsContainsWrongMove() {
-        return upsideResults.getResults()
-                .contains(WRONG_MOVE);
-    }
-
-    private boolean checkIfDownsideResultsContainsWrongMove() {
-        return downsideResults.getResults()
-                .contains(WRONG_MOVE);
+        return upsideResults.getResults().contains(WRONG_MOVE) ||
+                downsideResults.getResults().contains(WRONG_MOVE);
     }
 
     public OneSideResults getUpsideResults() {

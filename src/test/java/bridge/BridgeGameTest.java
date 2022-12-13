@@ -4,6 +4,7 @@ import static bridge.util.Constants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import bridge.domain.BridgeGame;
+import bridge.util.Moves;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,18 +20,22 @@ class BridgeGameTest {
         bridgeGame = new BridgeGame();
     }
 
-    @DisplayName("이동할 칸을 건널 수 있으면 O를 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"U:U:O", "D:D:O"}, delimiter = COLON)
-    void correctMove(String playerMove, String answerMove, String expectedMatchResult) {
-        assertThat(bridgeGame.move(playerMove, answerMove)).isEqualTo(expectedMatchResult);
+    @CsvSource(value = {"U:D:O"}, delimiter = COLON)
+    void 이동할_칸을_건널_수_있으면_O를_반환한다(
+            String answerMoveUp, String answerMoveDown, String MatchResult
+    ) {
+        assertThat(bridgeGame.move(Moves.UP, answerMoveUp)).isEqualTo(MatchResult);
+        assertThat(bridgeGame.move(Moves.DOWN, answerMoveDown)).isEqualTo(MatchResult);
     }
 
-    @DisplayName("이동할 칸을 건널 수 없으면 X를 반환한다.")
     @ParameterizedTest
-    @CsvSource(value = {"U:D:X", "D:U:X"}, delimiter = COLON)
-    void wrongMove(String playerMove, String answerMove, String expected) {
-        assertThat(bridgeGame.move(playerMove, answerMove)).isEqualTo(expected);
+    @CsvSource(value = {"U:D:X"}, delimiter = COLON)
+    void 이동할_칸을_건널_수_없으면_X를_반환한다(
+            String answerMoveUp, String answerMoveDown, String MatchResult
+    ) {
+        assertThat(bridgeGame.move(Moves.UP, answerMoveDown)).isEqualTo(MatchResult);
+        assertThat(bridgeGame.move(Moves.DOWN, answerMoveUp)).isEqualTo(MatchResult);
     }
 
     @DisplayName("게임을 다시 시작할 경우 시도 횟수가 1 증가한다.")

@@ -17,11 +17,10 @@ public class OutputView {
     private static final String FINAL_RESULT_TITLE = "최종 게임 결과";
     private static final String SUCCESS_OR_FAILURE_TITLE = "게임 성공 여부: ";
     private static final String TOTAL_TRIAL_COUNT_TITLE = "총 시도한 횟수: ";
-    private static final String GAME_START_TITLE = "다리 건너기 게임을 시작합니다.";
+    private static final String GAME_START_TITLE = "다리 건너기 게임을 시작합니다.\n";
 
     public static void printGameStart() {
         System.out.println(GAME_START_TITLE);
-        System.out.println();
     }
 
     public static void printMap(BridgeGame bridgeGame) {
