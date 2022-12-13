@@ -1,10 +1,17 @@
 package bridge;
 
-import bridge.util.SafeSide;
-import java.util.ArrayList;
+import static bridge.util.Constants.ERROR_TITLE;
+import static bridge.util.Constants.INVALID_BRIDGE_SIZE;
+
+import bridge.util.Moves;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BridgeMaker {
+
+    private static final int MINIMUM_BRIDGE_SIZE = 3;
+    private static final int MAXIMUM_BRIDGE_SIZE = 20;
 
     private final BridgeNumberGenerator bridgeNumberGenerator;
 
@@ -13,19 +20,19 @@ public class BridgeMaker {
     }
 
     public List<String> makeBridge(int size) {
-        final List<String> answerBridge = new ArrayList<>();
-        for (int index = 0; index < size; index++) {
-            updateBridge(answerBridge);
+        validate(size);
+        return Stream.generate(this::pickAnswerMove)
+                .limit(size)
+                .collect(Collectors.toList());
+    }
+
+    private void validate(int size) {
+        if (size < MINIMUM_BRIDGE_SIZE || size > MAXIMUM_BRIDGE_SIZE) {
+            throw new IllegalArgumentException(ERROR_TITLE + INVALID_BRIDGE_SIZE);
         }
-        return answerBridge;
     }
 
-    private void updateBridge(List<String> bridge) {
-        bridge.add(pickSafeSide());
-    }
-
-    private String pickSafeSide() {
-        final int number = bridgeNumberGenerator.generate();
-        return SafeSide.chooseUpOrDown(number);
+    private String pickAnswerMove() {
+        return Moves.chooseUpOrDown(bridgeNumberGenerator.generate());
     }
 }
