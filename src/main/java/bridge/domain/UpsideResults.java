@@ -2,7 +2,7 @@ package bridge.domain;
 
 import static bridge.util.Constants.BLANK_SPACE;
 
-import bridge.util.CommandKeys;
+import bridge.util.Commands;
 
 public class UpsideResults extends OneSideResults {
 
@@ -12,10 +12,10 @@ public class UpsideResults extends OneSideResults {
 
     @Override
     public void update(String playerMove, String matchResult) {
-        if (CommandKeys.isUp(playerMove)) {
+        if (Commands.isUp(playerMove)) {
             addResult(matchResult);
         }
-        if (CommandKeys.isDown(playerMove)) {
+        if (Commands.isDown(playerMove)) {
             addResult(BLANK_SPACE);
         }
     }

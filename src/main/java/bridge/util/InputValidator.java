@@ -67,18 +67,18 @@ public class InputValidator {
     }
 
     private static boolean isNotKeyForUp(String input) {
-        return (!CommandKeys.isUp(input.toUpperCase()));
+        return (!Commands.isUp(input.toUpperCase()));
     }
 
     private static boolean isNotKeyForDown(String input) {
-        return (!CommandKeys.isDown(input.toUpperCase()));
+        return (!Commands.isDown(input.toUpperCase()));
     }
 
     private static boolean isNotKeyForRetry(String input) {
-        return (!CommandKeys.isRetry(input.toUpperCase()));
+        return (!Commands.isRetry(input.toUpperCase()));
     }
 
     private static boolean isNotKeyForQuit(String input) {
-        return (!CommandKeys.isQuit(input.toUpperCase()));
+        return (!Commands.isQuit(input.toUpperCase()));
     }
 }

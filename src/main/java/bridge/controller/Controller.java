@@ -3,7 +3,7 @@ package bridge.controller;
 import bridge.domain.BridgeGame;
 import bridge.BridgeMaker;
 import bridge.BridgeRandomNumberGenerator;
-import bridge.util.CommandKeys;
+import bridge.util.Commands;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 import java.util.List;
@@ -47,19 +47,19 @@ public class Controller {
     }
 
     private void checkIfContinueOrNot(String playerCommand) {
-        if (CommandKeys.isRetry(playerCommand)) {
+        if (Commands.isRetry(playerCommand)) {
             bridgeGame.retry();
         }
-        if (CommandKeys.isQuit(playerCommand)) {
+        if (Commands.isQuit(playerCommand)) {
             bridgeGame.quit();
         }
     }
 
     private int moveToFirstOrLastIndex(int index, String playerCommand) {
-        if (CommandKeys.isRetry(playerCommand)) {
+        if (Commands.isRetry(playerCommand)) {
             index = toFirstIndex();
         }
-        if (CommandKeys.isQuit(playerCommand)) {
+        if (Commands.isQuit(playerCommand)) {
             index = toLastIndex();
         }
         return index;

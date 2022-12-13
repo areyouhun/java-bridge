@@ -14,10 +14,6 @@ public class Constants {
     public static final String NON_DIGIT_CHARACTER_FOUND = "숫자 외의 값이 입력되었습니다.";
 
     public static final String MOVING_FORMAT = "다음 칸으로 이동하기 위해선 U 또는 D를 입력해야 합니다.";
-    public static final String COMMAND_FORMAT = String.format(
-            "게임 재개 여부를 정하기 위해선 %s 또는 %s를 입력해야 합니다.",
-            CommandKeys.RETRY.getLetter(),
-            CommandKeys.QUIT.getLetter()
-    );
+    public static final String COMMAND_FORMAT = "게임 재개 여부를 정하기 위해선 Q 또는 R을 입력해야 합니다.";
     public static final String INVALID_BRIDGE_SIZE = "다리 길이는 3부터 20 사이의 숫자여야 합니다.";
 }
