@@ -4,17 +4,14 @@ import bridge.domain.Moves;
 
 public class BridgeGame {
 
-    private static final int INITIAL_COUNT = 1;
+    private static final int ADDITIONAL_COUNT = 1;
     private static final String SUCCESS = "성공";
     private static final String FAILURE = "실패";
     private static final String CORRECT_MOVE = "O";
     private static final String WRONG_MOVE = "X";
 
-    private int trialCount;
 
-    public BridgeGame() {
-        trialCount = INITIAL_COUNT;
-    }
+    public BridgeGame() {}
 
     public String move(Moves playerMove, String answerMove) {
         if (playerMove.isCorrectMove(answerMove)) {
@@ -23,8 +20,8 @@ public class BridgeGame {
         return WRONG_MOVE;
     }
 
-    public void retry() {
-        trialCount++;
+    public int retry(int trialCount) {
+        return trialCount + ADDITIONAL_COUNT;
     }
 
     public String toSuccess() {
@@ -33,9 +30,5 @@ public class BridgeGame {
 
     public String toFailure() {
         return FAILURE;
-    }
-
-    public int getTrialCount() {
-        return trialCount;
     }
 }
