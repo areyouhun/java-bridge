@@ -67,4 +67,8 @@ public class BridgeGame {
     public List<String> getDownsideResults() {
         return downsideResults.getResults();
     }
+
+    public String getGameResult() {
+        return gameResult;
+    }
 }

@@ -17,19 +17,18 @@ public class Controller {
 
     private final InputView inputView;
     private final OutputView outputView;
-
-    private List<String> answerBridge;
-    private BridgeGame bridgeGame;
+    private final List<String> answerBridge;
+    private final BridgeGame bridgeGame;
     
     private int trialCount;
 
     public Controller() {
         inputView = new InputView();
         outputView = new OutputView();
+        outputView.printGameStart();
 
         answerBridge = repeat(this::toAnswerBridge);
         bridgeGame = new BridgeGame();
-        
         trialCount = INITIAL_COUNT;
     }
 
@@ -37,8 +36,10 @@ public class Controller {
         for (int index = 0; index < answerBridge.size(); index++) {
             final Moves playerMove = repeat(this::toPlayerMove);
             compareMoves(playerMove, answerBridge.get(index));
+            outputView.printMap(bridgeGame);
             index = changeIndexIfResultsHaveWrongMove(index);
         }
+        outputView.printResult(bridgeGame, trialCount);
     }
 
     private void compareMoves(Moves playerMove, String answerMove) {
@@ -95,7 +96,6 @@ public class Controller {
     private int toLastIndex() {
         return answerBridge.size() - 1;
     }
-
 
     private <T> T repeat(Supplier<T> inputReader) {
         try {
