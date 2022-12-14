@@ -32,10 +32,10 @@ class BridgeGameTest {
 
     @Test
     void 게임을_다시_시작할_경우_시도_횟수가_1_증가한다() {
-        final int beforeTrialCount = 1;
-        final int afterTrialCount = bridgeGame.increaseCount(beforeTrialCount);
+        final int previousTrialCount = 1;
+        final int currentTrialCount = previousTrialCount + bridgeGame.increaseCount();
 
-        assertThat(afterTrialCount - beforeTrialCount).isEqualTo(1);
+        assertThat(currentTrialCount - previousTrialCount).isEqualTo(1);
     }
 
     @Test

@@ -10,12 +10,16 @@ public class BridgeGame {
     private static final String CORRECT_MOVE = "O";
     private static final String WRONG_MOVE = "X";
 
-    final OneSideResults upsideResults;
-    final OneSideResults downsideResults;
+    private final OneSideResults upsideResults;
+    private final OneSideResults downsideResults;
+
+    private String gameResult;
 
     public BridgeGame() {
         upsideResults = new UpsideResults();
         downsideResults = new DownsideResults();
+
+        gameResult = toSuccess();
     }
 
     public String move(Moves playerMove, String answerMove) {
@@ -30,13 +34,22 @@ public class BridgeGame {
         downsideResults.update(playerMove, moveResults);
     }
 
+    public boolean hasWrongMove() {
+        return upsideResults.getResults().contains(WRONG_MOVE) ||
+                downsideResults.getResults().contains(WRONG_MOVE);
+    }
+
     public void retry() {
         upsideResults.reset();
         downsideResults.reset();
     }
 
-    public int increaseCount(int trialCount) {
-        return trialCount + ADDITIONAL_COUNT;
+    public int increaseCount() {
+        return ADDITIONAL_COUNT;
+    }
+
+    public void quit() {
+        gameResult = toFailure();
     }
 
     public String toSuccess() {
