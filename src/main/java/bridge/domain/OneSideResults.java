@@ -15,12 +15,15 @@ public abstract class OneSideResults {
 
     public abstract void update(Moves playerMove, String moveResult);
 
+    public boolean contains(String input) {
+        return results.contains(input);
+    }
+
     public void reset() {
         results.clear();
-    };
+    }
 
     public List<String> getResults() {
         return results;
     }
-
 }

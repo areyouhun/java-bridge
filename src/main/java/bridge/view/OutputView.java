@@ -1,11 +1,9 @@
 package bridge.view;
 
 import bridge.domain.BridgeGame;
-import bridge.domain.OneSideResults;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class OutputView {
 
@@ -19,7 +17,7 @@ public class OutputView {
 
     private static final String FINAL_RESULT_TITLE = "최종 게임 결과";
     private static final String SUCCESS_OR_FAILURE_TITLE = "게임 성공 여부: ";
-    private static final String TOTAL_TRIAL_COUNT_TITLE = "총 시도한 횟수: ";
+    private static final String TRIAL_COUNT_TITLE = "총 시도한 횟수: ";
 
     public void printGameStart() {
         System.out.println(GAME_START_TITLE);
@@ -28,9 +26,9 @@ public class OutputView {
     public void printMap(BridgeGame bridgeGame) {
         final StringJoiner upsideMap = new StringJoiner(BLANK_SPACE);
         final StringJoiner downsideMap = new StringJoiner(BLANK_SPACE);
-
         updateMap(upsideMap, bridgeGame.getUpsideResults());
         updateMap(downsideMap, bridgeGame.getDownsideResults());
+
         printBothSideMaps(upsideMap, downsideMap);
     }
 
@@ -47,9 +45,7 @@ public class OutputView {
         });
     }
 
-    private void addPartition(
-            int index, List<String> oneSideResults, StringJoiner oneSideMap
-    ) {
+    private void addPartition(int index, List<String> oneSideResults, StringJoiner oneSideMap) {
         if (hasMoreThanTwoElements(oneSideResults) && isNotLastIndex(index, oneSideResults)) {
             oneSideMap.add(BRIDGE_PARTITION);
         }
@@ -70,10 +66,10 @@ public class OutputView {
     }
 
 
-    public void printResult(BridgeGame bridgeGame, int trialCount) {
+    public void printResult(BridgeGame bridgeGame, int trialCount, String gameResult) {
         System.out.println(FINAL_RESULT_TITLE);
         printMap(bridgeGame);
-        printSuccessOrFailure(bridgeGame.getGameResult());
+        printSuccessOrFailure(gameResult);
         printTrialCount(trialCount);
     }
 
@@ -82,7 +78,7 @@ public class OutputView {
     }
 
     private void printTrialCount(int trialCount) {
-        System.out.println(TOTAL_TRIAL_COUNT_TITLE + trialCount);
+        System.out.println(TRIAL_COUNT_TITLE + trialCount);
     }
 
     public void printErrorMessage(String errorMessage) {

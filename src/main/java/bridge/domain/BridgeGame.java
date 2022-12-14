@@ -10,23 +10,25 @@ public class BridgeGame {
     private static final String CORRECT_MOVE = "O";
     private static final String WRONG_MOVE = "X";
 
+    private final AnswerBridge answerBridge;
     private final OneSideResults upsideResults;
     private final OneSideResults downsideResults;
 
-    private String gameResult;
-
-    public BridgeGame() {
+    public BridgeGame(AnswerBridge answerBridge) {
+        this.answerBridge = answerBridge;
         upsideResults = new UpsideResults();
         downsideResults = new DownsideResults();
-
-        gameResult = toSuccess();
     }
 
-    public String move(Moves playerMove, String answerMove) {
-        if (playerMove.isCorrectMove(answerMove)) {
+    public String move(Moves playerMove, int index) {
+        if (answerBridge.isCorrect(playerMove, index)) {
             return CORRECT_MOVE;
         }
         return WRONG_MOVE;
+    }
+
+    public int getAnswerBridgeSize() {
+        return answerBridge.getSize();
     }
 
     public void updateBothSideResults(Moves playerMove, String moveResults) {
@@ -35,8 +37,7 @@ public class BridgeGame {
     }
 
     public boolean hasWrongMove() {
-        return upsideResults.getResults().contains(WRONG_MOVE) ||
-                downsideResults.getResults().contains(WRONG_MOVE);
+        return upsideResults.contains(WRONG_MOVE) || downsideResults.contains(WRONG_MOVE);
     }
 
     public void retry() {
@@ -46,10 +47,6 @@ public class BridgeGame {
 
     public int increaseCount() {
         return ADDITIONAL_COUNT;
-    }
-
-    public void quit() {
-        gameResult = toFailure();
     }
 
     public String toSuccess() {
@@ -66,9 +63,5 @@ public class BridgeGame {
 
     public List<String> getDownsideResults() {
         return downsideResults.getResults();
-    }
-
-    public String getGameResult() {
-        return gameResult;
     }
 }

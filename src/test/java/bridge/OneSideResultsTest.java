@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 class OneSideResultsTest {
 
     private static final int FIRST_INDEX = 0;
+    private static final int EMPTY_SIZE = 0;
 
     private OneSideResults upsideResults;
     private OneSideResults downsideResults;
@@ -35,8 +36,8 @@ class OneSideResultsTest {
     }
     
     private void areResetAsExpected(int SizeOfUpsideResults, int SizeOfDownsideResults) {
-        assertThat(SizeOfUpsideResults).isEqualTo(0);
-        assertThat(SizeOfDownsideResults).isEqualTo(0);
+        assertThat(SizeOfUpsideResults).isEqualTo(EMPTY_SIZE);
+        assertThat(SizeOfDownsideResults).isEqualTo(EMPTY_SIZE);
     }
     
     @BeforeEach

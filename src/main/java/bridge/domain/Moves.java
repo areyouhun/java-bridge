@@ -10,7 +10,7 @@ public enum Moves {
     private final int number;
     private final String key;
 
-    private static final String MOVING_FORMAT = "다음 칸으로 이동하기 위해선 U 또는 D를 입력해야 합니다.";
+    private static final String MOVING_FORMAT = "다음 칸으로 이동하려면 U 또는 D를 입력해야 합니다.";
 
     Moves(int number, String key) {
         this.number = number;
@@ -22,6 +22,10 @@ public enum Moves {
             return UP.key;
         }
         return DOWN.key;
+    }
+
+    public static boolean isUpOrDown(String input) {
+        return input.equals(UP.key) || input.equals(DOWN.key);
     }
 
     public static Moves getMoveBy(String input) {

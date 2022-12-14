@@ -23,7 +23,7 @@ class MovesTest {
     void 입력값이_대문자_U나_D가_아니면_예외를_발생시킨다(String input) {
         assertThatThrownBy(() -> Moves.getMoveBy(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("다음 칸으로 이동하기 위해선 U 또는 D를 입력해야 합니다.");
+                .hasMessageContaining("다음 칸으로 이동하려면 U 또는 D를 입력해야 합니다.");
     }
 
     @ParameterizedTest

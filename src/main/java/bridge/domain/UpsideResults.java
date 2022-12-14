@@ -1,6 +1,6 @@
 package bridge.domain;
 
-public class UpsideResults extends OneSideResults{
+public class UpsideResults extends OneSideResults {
 
     public UpsideResults() {
         super();

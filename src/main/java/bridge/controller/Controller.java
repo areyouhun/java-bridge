@@ -2,6 +2,7 @@ package bridge.controller;
 
 import bridge.BridgeMaker;
 import bridge.BridgeRandomNumberGenerator;
+import bridge.domain.AnswerBridge;
 import bridge.domain.BridgeGame;
 import bridge.domain.Commands;
 import bridge.domain.Moves;
@@ -15,35 +16,32 @@ public class Controller {
     private static final int INITIAL_COUNT = 1;
     private static final int INITIAL_INDEX = -1;
 
-    private final InputView inputView;
-    private final OutputView outputView;
-    private final List<String> answerBridge;
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
     private final BridgeGame bridgeGame;
-    
+
+    private String gameResult;
     private int trialCount;
 
     public Controller() {
-        inputView = new InputView();
-        outputView = new OutputView();
         outputView.printGameStart();
-
-        answerBridge = repeat(this::toAnswerBridge);
-        bridgeGame = new BridgeGame();
+        bridgeGame = new BridgeGame(repeat(this::toAnswerBridge));
+        gameResult = bridgeGame.toSuccess();
         trialCount = INITIAL_COUNT;
     }
 
     public void start() {
-        for (int index = 0; index < answerBridge.size(); index++) {
+        for (int index = 0; index < bridgeGame.getAnswerBridgeSize(); index++) {
             final Moves playerMove = repeat(this::toPlayerMove);
-            compareMoves(playerMove, answerBridge.get(index));
+            updateMoveResult(playerMove, index);
             outputView.printMap(bridgeGame);
             index = changeIndexIfResultsHaveWrongMove(index);
         }
-        outputView.printResult(bridgeGame, trialCount);
+        outputView.printResult(bridgeGame, trialCount, gameResult);
     }
 
-    private void compareMoves(Moves playerMove, String answerMove) {
-        final String moveResult = bridgeGame.move(playerMove, answerMove);
+    private void updateMoveResult(Moves playerMove, int index) {
+        final String moveResult = bridgeGame.move(playerMove, index);
         bridgeGame.updateBothSideResults(playerMove, moveResult);
     }
 
@@ -62,23 +60,24 @@ public class Controller {
             trialCount += bridgeGame.increaseCount();
         }
         if (playerCommand.isQuit()) {
-            bridgeGame.quit();
+            gameResult = bridgeGame.toFailure();
         }
     }
 
     private int moveToFirstOrLastIndex(int index, Commands playerCommand) {
         if (playerCommand.isRetry()) {
-            index = toFirstIndex();
+            return toFirstIndex();
         }
         if (playerCommand.isQuit()) {
-            index = toLastIndex();
+            return toLastIndex();
         }
         return index;
     }
 
-    private List<String> toAnswerBridge() {
+    private AnswerBridge toAnswerBridge() {
         final BridgeMaker bridgeMaker = new BridgeMaker(new BridgeRandomNumberGenerator());
-        return bridgeMaker.makeBridge(inputView.readBridgeSize());
+        final List<String> answerBridge = bridgeMaker.makeBridge(inputView.readBridgeSize());
+        return new AnswerBridge(answerBridge);
     }
 
     private Moves toPlayerMove() {
@@ -94,7 +93,7 @@ public class Controller {
     }
 
     private int toLastIndex() {
-        return answerBridge.size() - 1;
+        return bridgeGame.getAnswerBridgeSize() - 1;
     }
 
     private <T> T repeat(Supplier<T> inputReader) {

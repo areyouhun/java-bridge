@@ -1,6 +1,5 @@
 package bridge.view;
 
-import bridge.view.InputValidator;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {

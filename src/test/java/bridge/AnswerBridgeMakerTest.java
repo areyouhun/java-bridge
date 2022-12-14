@@ -10,7 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class BridgeMakerTest {
+class AnswerBridgeMakerTest {
 
     private static final char COLON = ':';
 
@@ -30,13 +30,4 @@ class BridgeMakerTest {
 
         assertThat(bridge).containsAnyOf("U", "D");
     }
-
-    @ParameterizedTest
-    @ValueSource(ints = {2, 21})
-    void 다리의_길이가_3과_20_사이가_아니면_예외를_발생시킨다(int size) {
-        assertThatThrownBy(() -> bridgeMaker.makeBridge(size))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("다리 길이는 3부터 20 사이의 숫자여야 합니다.");
-    }
-
 }

@@ -9,7 +9,7 @@ public enum Commands {
 
     private final String key;
 
-    private static final String COMMAND_FORMAT = "게임 재개 여부를 정하기 위해선 Q 또는 R을 입력해야 합니다.";
+    private static final String COMMAND_FORMAT = "게임 재개 여부를 정하려면 Q 또는 R을 입력해야 합니다.";
 
     Commands(String key) {
         this.key = key;
@@ -28,9 +28,5 @@ public enum Commands {
 
     public boolean isQuit() {
         return this.equals(QUIT);
-    }
-
-    public String getKey() {
-        return key;
     }
 }

@@ -7,6 +7,12 @@ public class InputValidator {
     private static final String NON_DIGIT_CHARACTER_FOUND = "숫자 외의 값이 입력되었습니다.";
     private static final String NON_ALPHABETIC_CHARACTER_INCLUDED = "(.*)[^a-zA-Z](.*)";
 
+    public void validateBlank(String input) {
+        if (input.isBlank()) {
+            throw new IllegalArgumentException(EMPTY_INPUT);
+        }
+    }
+
     public int toInteger(String input) {
         try {
             return Integer.parseInt(input);
@@ -18,12 +24,6 @@ public class InputValidator {
     public String capitalize(String input) {
         validateAlphabet(input);
         return input.toUpperCase();
-    }
-
-    public void validateBlank(String input) {
-        if (input.isBlank()) {
-            throw new IllegalArgumentException(EMPTY_INPUT);
-        }
     }
 
     private void validateAlphabet(String input) {
