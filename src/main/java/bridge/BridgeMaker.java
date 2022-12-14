@@ -1,5 +1,6 @@
 package bridge;
 
+import bridge.domain.Moves;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,10 +31,6 @@ public class BridgeMaker {
     }
 
     private String generateAnswerMove() {
-        final int number = bridgeNumberGenerator.generate();
-        if (number == 0) {
-            return "D";
-        }
-        return "U";
+        return Moves.chooseUpOrDown(bridgeNumberGenerator.generate());
     }
 }
