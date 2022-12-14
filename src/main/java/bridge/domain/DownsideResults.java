@@ -17,6 +17,6 @@ public class DownsideResults extends OneSideResults{
     }
 
     private void add(String result) {
-        results.add(result);
+        super.getResults().add(result);
     }
 }

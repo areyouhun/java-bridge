@@ -7,7 +7,7 @@ public abstract class OneSideResults {
 
     protected static final String BLANK_SPACE = " ";
 
-    protected final List<String> results;
+    private final List<String> results;
 
     public OneSideResults() {
         this.results = new ArrayList<>();

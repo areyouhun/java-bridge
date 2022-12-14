@@ -3,6 +3,7 @@ package bridge;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import bridge.domain.BridgeGame;
 import bridge.domain.Moves;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -32,7 +33,7 @@ class BridgeGameTest {
     @Test
     void 게임을_다시_시작할_경우_시도_횟수가_1_증가한다() {
         final int beforeTrialCount = 1;
-        final int afterTrialCount = bridgeGame.retry(beforeTrialCount);
+        final int afterTrialCount = bridgeGame.increaseCount(beforeTrialCount);
 
         assertThat(afterTrialCount - beforeTrialCount).isEqualTo(1);
     }
