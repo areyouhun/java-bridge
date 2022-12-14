@@ -1,4 +1,4 @@
-package bridge.util;
+package bridge.domain;
 
 import static bridge.util.Constants.COMMAND_FORMAT;
 import static bridge.util.Constants.ERROR_TITLE;

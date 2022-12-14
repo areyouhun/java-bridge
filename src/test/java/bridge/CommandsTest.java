@@ -4,7 +4,7 @@ import static bridge.util.Constants.COMMAND_FORMAT;
 import static bridge.util.Constants.ERROR_TITLE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import bridge.util.Commands;
+import bridge.domain.Commands;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

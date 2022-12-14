@@ -2,10 +2,6 @@ package bridge.domain;
 
 import static bridge.util.Constants.BLANK_SPACE;
 
-import bridge.util.Commands;
-import bridge.util.Moves;
-import java.util.List;
-
 public class DownsideResults extends OneSideResults {
 
     public DownsideResults() {

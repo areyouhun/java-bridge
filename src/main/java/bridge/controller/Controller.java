@@ -3,8 +3,8 @@ package bridge.controller;
 import bridge.domain.BridgeGame;
 import bridge.BridgeMaker;
 import bridge.BridgeRandomNumberGenerator;
-import bridge.util.Commands;
-import bridge.util.Moves;
+import bridge.domain.Commands;
+import bridge.domain.Moves;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 import java.util.List;
@@ -31,12 +31,16 @@ public class Controller {
     public void start() {
         for (int index = 0; index < answerBridge.size(); index++) {
             final Moves playerMove = repeat(this::toPlayerMove);
-            final String matchResult = bridgeGame.move(playerMove, answerBridge.get(index));
-            bridgeGame.updateBothSidesResults(playerMove, matchResult);
+            compareMoves(playerMove, answerBridge.get(index));
             OutputView.printMap(bridgeGame);
             index = changeIndexIfResultsHaveWrongMove(index);
         }
         OutputView.printResult(bridgeGame);
+    }
+    
+    private void compareMoves(Moves playerMove, String answerMove) {
+        final String moveResult = bridgeGame.move(playerMove, answerMove);
+        bridgeGame.updateBothSidesResults(playerMove, moveResult);
     }
 
     private Moves toPlayerMove() {
@@ -46,7 +50,7 @@ public class Controller {
     private int changeIndexIfResultsHaveWrongMove(int index) {
         if (bridgeGame.hasWrongMove()) {
             final Commands playerCommand = repeat(this::toPlayerCommand);
-            checkIfContinueOrNot(playerCommand);
+            checkIfRetryOrNot(playerCommand);
             index = moveToFirstOrLastIndex(index, playerCommand);
         }
         return index;
@@ -56,12 +60,9 @@ public class Controller {
         return Commands.getCommandBy(InputView.readGameCommand());
     }
 
-    private void checkIfContinueOrNot(Commands playerCommand) {
+    private void checkIfRetryOrNot(Commands playerCommand) {
         if (playerCommand.isRetry()) {
             bridgeGame.retry();
-        }
-        if (playerCommand.isQuit()) {
-            bridgeGame.quit();
         }
     }
 
@@ -87,7 +88,7 @@ public class Controller {
         try {
             return inputReader.get();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            OutputView.printErrorMessage(e.getMessage());
             return repeat(inputReader);
         }
     }

@@ -1,6 +1,7 @@
 package bridge.view;
 
 import static bridge.util.Constants.BLANK_SPACE;
+import static bridge.util.Constants.ERROR_TITLE;
 
 import bridge.domain.BridgeGame;
 import bridge.domain.OneSideResults;
@@ -82,5 +83,9 @@ public class OutputView {
 
     private static void printTotalTrialCount(int totalTrialCount) {
         System.out.println(TOTAL_TRIAL_COUNT_TITLE + totalTrialCount);
+    }
+
+    public static void printErrorMessage(String message) {
+        System.out.println(message);
     }
 }

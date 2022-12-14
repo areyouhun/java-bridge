@@ -1,7 +1,5 @@
 package bridge.domain;
 
-import bridge.util.Moves;
-
 public class BridgeGame {
 
     private static final int INITIAL_COUNT = 1;
@@ -31,9 +29,9 @@ public class BridgeGame {
         return WRONG_MOVE;
     }
 
-    public void updateBothSidesResults(Moves playerMove, String matchResult) {
-        upsideResults.update(playerMove, matchResult);
-        downsideResults.update(playerMove, matchResult);
+    public void updateBothSidesResults(Moves playerMove, String moveResult) {
+        upsideResults.update(playerMove, moveResult);
+        downsideResults.update(playerMove, moveResult);
     }
 
     public void retry() {

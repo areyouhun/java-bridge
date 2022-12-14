@@ -2,9 +2,6 @@ package bridge.domain;
 
 import static bridge.util.Constants.BLANK_SPACE;
 
-import bridge.util.Commands;
-import bridge.util.Moves;
-
 public class UpsideResults extends OneSideResults {
 
     public UpsideResults() {

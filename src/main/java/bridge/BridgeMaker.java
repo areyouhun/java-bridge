@@ -3,7 +3,7 @@ package bridge;
 import static bridge.util.Constants.ERROR_TITLE;
 import static bridge.util.Constants.INVALID_BRIDGE_SIZE;
 
-import bridge.util.Moves;
+import bridge.domain.Moves;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

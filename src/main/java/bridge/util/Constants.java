@@ -5,7 +5,6 @@ public class Constants {
     public static final char COLON = ':';
     public static final String BLANK_SPACE = " ";
 
-
     public static final String ERROR_TITLE = "[ERROR] ";
     public static final String NON_ALPHABETIC_CHARACTER_FOUND = "알파벳 외의 값이 입력되었습니다.";
     public static final String EMPTY_INPUT = "입력된 값이 없습니다.";
